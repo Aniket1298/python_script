@@ -1,16 +1,22 @@
 class Tree:
+	#edges - u,v edge
+	#n - number of nodes
+	
 	def __init__(self,edges,n):
 		self.tree=[]
 		self.nodes=n
 		f=[0]*(n+1)
 		self.leaves=[] #leaf nodes
+		
 		for i in range(n+1):
 			self.tree.append([])
+			
 		for u,v in edges:
 			self.tree[u].append(v)
 			self.tree[v].append(u)
 			f[u]+=1
 			f[v]+=1
+			
 		for i in range(len(f)):
 			if f[i]==1:
 				self.leaves.append(i)
@@ -20,6 +26,7 @@ class Tree:
 		l=[]
 		visited=[0]*(self.nodes+1)
 		visited[root]=1
+		
 		while len(q)!=0:
 			layer=[]
 			for i in q:
@@ -32,5 +39,5 @@ class Tree:
 				for i in self.tree[x]:
 					if visited[i]==0:
 						t.append(i)
-			q=t[::]
+			q=t
 		return l
